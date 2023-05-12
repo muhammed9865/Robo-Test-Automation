@@ -15,10 +15,11 @@ jobs:
 
       - name: Copy Text to output
         id: copy
-        run:
-          # set the content of google-services.json to an output variable
-          GOOGLE_SERVICES=$(cat app/google-services.json)
+        run: |
+          GOOGLE_SERVICES=$(cat app/google-services.json) 
           echo "GOOGLE_SERVICES=$GOOGLE_SERVICES" >> $GITHUB_ENV
+          echo "Contents of google-services.json: $GOOGLE_SERVICES"
+          echo "Environment variables: $(env)"
 
 
       - name: Print Text from output
