@@ -42,6 +42,7 @@ jobs:
           --app app/app-debug.apk \
           --device model=Pixel3,version=30,locale=en,orientation=portrait \
           --timeout 1m \
+          --format=json \
           --no-record-video \
           --no-performance-metrics > robo-test-result.txt
           
