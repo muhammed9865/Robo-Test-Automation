@@ -19,10 +19,7 @@ jobs:
           # set the content of google-services.json to an output variable
           EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
           echo "GOOGLE_SERVICE<<$EOF" >> "$GITHUB_ENV"
-          # print new line
-          echo >> "\n"
           echo "$(cat app/google-services.json)" >> $GITHUB_OUTPUT
-          echo >> "\n"
           echo "$EOF" >> "$GITHUB_ENV"
 
 
