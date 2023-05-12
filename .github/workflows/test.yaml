@@ -17,8 +17,9 @@ jobs:
         id: copy
         run:
           # set the content of google-services.json to an output variable
-          delimiter=$(head /dev/urandom | tr -dc a-z0-9 | head -c 32 ; echo '')
-          echo "google-services=$(cat app/google-services.json)" >> $GITHUB_OUTPUT
+          echo 'google-services<<EOF' >> $GITHUB_OUTPUT
+          echo "$(cat app/google-services.json)" >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
 
 
       - name: Print Text from output
