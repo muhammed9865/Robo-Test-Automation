@@ -39,7 +39,7 @@ jobs:
           --device model=Pixel3,version=30,locale=en,orientation=portrait \
           --timeout 1m \
           --no-record-video \
-          --no-performance-metrics > robo-test-result.json \
+          --no-performance-metrics > ${{ runner.workspace }}/robo-test-result.json \
 
       - name: Setup python
         uses: actions/setup-python@v2
