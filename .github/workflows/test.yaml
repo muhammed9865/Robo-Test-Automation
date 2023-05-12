@@ -16,9 +16,11 @@ jobs:
       - name: Copy Text to output
         id: copy
         run: |
-          GOOGLE_SERVICES=$(cat app/google-services.json) 
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "GOOGLE_SERVICE<<$EOF" >> "$GITHUB_ENV"
           echo "GOOGLE_SERVICES=$GOOGLE_SERVICES" >> $GITHUB_ENV
-          echo "Contents of google-services.json: $GOOGLE_SERVICES"
+          echo "$(cat app/google-services.json)" >> $GITHUB_ENV"
+          echo "$EOF" >> "$GITHUB_ENV"
           echo "Environment variables: $(env)"
 
 
