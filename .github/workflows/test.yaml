@@ -13,15 +13,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Copy Text to output
-        id: copy
+      - name: Send Google service file to slack
         run: |
-          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-          echo "JSON_RESPONSE<<$EOF" >> "$GITHUB_ENV"
-          echo "$(cat app/google-services.json) >> "$GITHUB_ENV"
-          echo -e "\n$EOF" >> "$GITHUB_ENV"
-
-
-      - name: Print Text from output
-        run: echo "${{ env.JSON_RESPONSE }}"
+          WEBHOOK_URL=${{ secrets.SLACK_WEBHOOK_URL }}
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Google service file"}' $WEBHOOK_URL"
 
