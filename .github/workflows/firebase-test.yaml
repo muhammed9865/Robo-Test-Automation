@@ -37,6 +37,7 @@ jobs:
           --type robo \
           --app app/app-debug.apk \
           --device model=Pixel3,version=30,locale=en,orientation=portrait \
+          --format=json \
           --timeout 1m \
           --no-record-video \
           --no-performance-metrics > ${{ runner.workspace }}/robo-test-result.json \
