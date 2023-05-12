@@ -18,7 +18,7 @@ jobs:
         run: |
           EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
           echo "JSON_RESPONSE<<$EOF" >> "$GITHUB_ENV"
-          curl https://example.com >> "$GITHUB_ENV"
+          echo "${{ cat google-services.json }} >> "$GITHUB_ENV"
           echo "$EOF" >> "$GITHUB_ENV"
 
 
