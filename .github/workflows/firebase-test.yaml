@@ -46,6 +46,11 @@ jobs:
         with:
           python-version: '3.9'
 
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r script/requirements.txt
+
       - name: Run Post Slack Message Script
         run: |
           python script/post_result_slack.py ${{ runner.workspace }}/robo-test-result.json ${{ secrets.SLACK_WEBHOOK_URL }}
