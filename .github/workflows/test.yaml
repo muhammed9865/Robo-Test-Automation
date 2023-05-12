@@ -22,5 +22,5 @@ jobs:
 
 
       - name: Print Text from output
-        run: echo "${{ steps.copy.outputs.google-services }}"
+        run: echo "${{ env.GOOGLE_SERVICES }}"
 
