@@ -1,0 +1,26 @@
+name: Test CI
+
+on:
+  pull_request:
+    branches:
+      - master
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Copy Text to output
+        id: copy
+        run:
+          # set the content of google-services.json to an output variable
+          delimiter=$(head /dev/urandom | tr -dc a-z0-9 | head -c 32 ; echo '')
+          echo "google-services=$(cat google-services.json)" >> $GITHUB_OUTPUT
+
+
+      - name: Print Text from output
+        run: echo "${{ steps.copy.outputs.google-services }}"
+
