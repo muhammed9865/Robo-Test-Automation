@@ -16,6 +16,6 @@ jobs:
       - name: Send Google service file to slack
         run: |
           # read google service file and send to slack
-          google_service=$(cat ${app/google-services.json)
-          curl -X POST -H 'Content-type: application/json' --data '{"text": \`\`\`${google_service}\`\`\`\"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+          google_service="$(cat ${app/google-services.json)"
+          curl -X POST -H 'Content-type: application/json' --data '{"text": "\`\`\`${google_service}\`\`\`\"}' ${{ secrets.SLACK_WEBHOOK_URL }}
 
