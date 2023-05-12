@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "360201195536",
+    "project_id": "testci2",
+    "storage_bucket": "testci2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360201195536:android:1cf98c8edbc4a9e14d7a95",
+        "android_client_info": {
+          "package_name": "com.salman.testci2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "360201195536-lvgv9kdondgm72b1pt4e0hv4tghahl05.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.salman.testci2",
+            "certificate_hash": "63293f04a6460a399ab569c1cb25f4796e4f4ff1"
+          }
+        },
+        {
+          "client_id": "360201195536-sgh53b9nidangcqa52d07e3pbj2kmgl6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5tomHchOVU5hb35yUnFVvMZDDQQBvNz0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "360201195536-sgh53b9nidangcqa52d07e3pbj2kmgl6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
