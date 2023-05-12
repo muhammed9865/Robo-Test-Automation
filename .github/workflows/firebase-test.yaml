@@ -41,10 +41,14 @@ jobs:
           --no-record-video \
           --no-performance-metrics > robo-test-result.json \
 
-          result="$(cat robo-test-result.json)"
-          escaped_result=$(echo $result | sed 's/"/\\"/g')
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
 
-          curl -X POST -H "Content-Type: application/json" --data "{\"text\":\"$escaped_result\"}" ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: Run Post Slack Message Script
+        run: |
+          python script/post_result_slack.py ${{ runner.workspace }}/robo-test-result.json ${{ secrets.SLACK_WEBHOOK_URL }}
           
 
         
