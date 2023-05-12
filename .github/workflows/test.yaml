@@ -17,6 +17,7 @@ jobs:
         run: |
           # read google service file and send to slack
           google_service="$(cat app/google-services.json)"
-          echo $google_service
-          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"$google_service\"}" ${{ secrets.SLACK_WEBHOOK_URL }}
+          escaped_service=$(echo $google_service | sed 's/"/\\"/g')
+          echo $escaped_service
+          curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"$escaped_service\"}" ${{ secrets.SLACK_WEBHOOK_URL }}
 
