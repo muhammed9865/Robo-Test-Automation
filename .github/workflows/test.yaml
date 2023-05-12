@@ -17,13 +17,11 @@ jobs:
         id: copy
         run: |
           EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-          echo "GOOGLE_SERVICE<<$EOF" >> "$GITHUB_ENV"
-          echo "GOOGLE_SERVICES=$GOOGLE_SERVICES" >> $GITHUB_ENV
-          echo "$(cat app/google-services.json)" >> $GITHUB_ENV"
+          echo "JSON_RESPONSE<<$EOF" >> "$GITHUB_ENV"
+          curl https://example.com >> "$GITHUB_ENV"
           echo "$EOF" >> "$GITHUB_ENV"
-          echo "Environment variables: $(env)"
 
 
       - name: Print Text from output
-        run: echo "${{ env.GOOGLE_SERVICES }}"
+        run: echo "${{ env.JSON_RESPONSE }}"
 
