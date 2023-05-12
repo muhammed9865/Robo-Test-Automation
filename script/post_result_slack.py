@@ -4,6 +4,16 @@ import sys
 import os
 
 
+
+def fix_input_text(data: str) -> str:
+    new_data = ""
+    for line in data.splitlines():
+        if line.startswith("["):
+            new_data += "[\n" + line[1:] + "\n"
+    
+    return new_data
+
+
 # get the input file
 input_file = sys.argv[1]
 # get the slack webhook url
@@ -18,8 +28,10 @@ else:
 with open(input_file) as f:
     try:
         print("Reading input file...")
-        print("lines: " + str((f.readlines())))
-        data = json.load(f)
+        data = fix_input_text(f.read())
+        print("lines: " + data)
+
+        data = json.loads(data)
         
         message = ""
         if app_version != "":
