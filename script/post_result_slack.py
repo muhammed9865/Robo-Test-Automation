@@ -4,35 +4,6 @@ import sys
 import os
 
 
-# get the input file
-input_file = sys.argv[1]
-
-# get the slack webhook url
-slack_webhook_url = sys.argv[2]
-
-# get the app version
-if len(sys.argv) > 3:
-    app_version = sys.argv[3]
-else:
-    app_version = ""
-
-
-# the input look like this:
-#'[\n', '  ***\n', '    "axis_value": "Pixel3-30-en-portrait",\n', '    "outcome": "Passed",\n', '    "test_details": "--"\n', '  ***\n', ']\n']
-# remove any unnecessary characters to make it a valid json
-def make_good_json(data: str) -> str:
-    data = data.replace("\n", "")
-    data = data.replace("\'", "\"")
-    data = data.replace("***", "")
-    data = data.replace("]", "")
-    data = data.replace("[", "")
-    data = data.replace("  ", "")
-    data = data.replace("    ", "")
-
-    return data
-
-
-
 def fix_input_text(data: list) -> str:
     # Convert the input JSON string to a Python list
     input_list = json.loads(data)
@@ -62,11 +33,17 @@ def fix_input_text(data: list) -> str:
 
     return output_json
 
-def prepare_message(data) -> str:
+def prepare_message(data, app_name, app_version) -> str:
     message = ""
-    if app_version != "":
+    
+    if app_name != "":
+        app_details = app_name
+        if app_version != "":
+            app_details += " - " + app_version
+    
+    if app_details != "":
         message += "> *Version*\n"
-        message += "> " + app_version + "\n"
+        message += "> " + app_details + "\n"
 
     message += "> *Test Details*\n"
     for item in data:
@@ -98,6 +75,26 @@ def send_message(message: str):
         print("Message sent successfully!")
 
 
+#### Script starts here ####
+
+# get the input file
+input_file = sys.argv[1]
+
+# get the slack webhook url
+slack_webhook_url = sys.argv[2]
+
+# get the app name
+if len(sys.argv) > 3:
+    app_name = sys.argv[3]
+else:
+    app_name = ""
+
+# get the app version
+if len(sys.argv) > 4:
+    app_version = sys.argv[4]
+else:
+    app_version = ""
+
 with open(input_file) as f:
     try:
         print("Reading input file...")
@@ -111,7 +108,7 @@ with open(input_file) as f:
         
         data = json.loads(last_input)
         
-        message = prepare_message(data)
+        message = prepare_message(data, app_name, app_version)
 
         print("Sending message to Slack...")
         send_message(message)
