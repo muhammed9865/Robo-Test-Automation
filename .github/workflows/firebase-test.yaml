@@ -8,7 +8,7 @@ on:
 env:
   DEBUG_APK_PATH: "app/build/outputs/apk/debug/app-debug.apk"
   STAGING_APK_PATH: "app/build/outputs/apk/staging/app-staging.apk"
-  JAVA_VERSION: "1.11"
+  JAVA_VERSION: "11"
 
 jobs:
   setup-test:
