@@ -20,6 +20,16 @@ android {
         }
     }
 
+    signingConfigs {
+        staging {
+            storeFile(file(STAGING_STORE_FILE))
+            storePassword STAGING_STORE_PASSWORD
+            keyAlias STAGING_KEY_ALIAS
+            keyPassword STAGING_KEY_PASSWORD
+
+        }
+    }
+
     buildTypes {
         staging {
             minifyEnabled false
@@ -29,6 +39,7 @@ android {
                     outputFileName = "app-staging.apk"
                 }
             }
+            signingConfig signingConfigs.staging
         }
         release {
             minifyEnabled false
