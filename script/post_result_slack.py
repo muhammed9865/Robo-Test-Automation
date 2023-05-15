@@ -17,13 +17,50 @@ else:
     app_version = ""
 
 
+# the input look like this:
+#'[\n', '  ***\n', '    "axis_value": "Pixel3-30-en-portrait",\n', '    "outcome": "Passed",\n', '    "test_details": "--"\n', '  ***\n', ']\n']
+# remove any unnecessary characters to make it a valid json
+def make_good_json(data: str) -> str:
+    data = data.replace("\n", "")
+    data = data.replace("\'", "\"")
+    data = data.replace("***", "")
+    data = data.replace("]", "")
+    data = data.replace("[", "")
+    data = data.replace("  ", "")
+    data = data.replace("    ", "")
+
+    return data
+
+
+
 def fix_input_text(data: list) -> str:
-    new_data = ""
-    for line in data:
-        if line.startswith("["):
-            new_data += "[\n" + line[1:] + "\n"
-    
-    return new_data
+    # Convert the input JSON string to a Python list
+    input_list = json.loads(data)
+
+    # Create a new list to store the fixed format dictionaries
+    output_list = []
+
+    # Iterate over each dictionary in the input list
+    for item in input_list:
+        # Extract the values from the dictionary
+        axis_value = item['axis_value']
+        outcome = item['outcome']
+        test_details = item['test_details']
+
+        # Create a new dictionary in the correct format
+        new_item = {
+            'axis_value': axis_value,
+            'outcome': outcome,
+            'test_details': test_details
+        }
+
+        # Append the new dictionary to the output list
+        output_list.append(new_item)
+
+    # Convert the output list to JSON string in the correct format
+    output_json = json.dumps(output_list, indent=4)
+
+    return output_json
 
 def prepare_message(data) -> str:
     message = ""
@@ -64,13 +101,15 @@ def send_message(message: str):
 with open(input_file) as f:
     try:
         print("Reading input file...")
-        input = f.readlines()
+        input = f.read()
         fixed_input = fix_input_text(input)
 
+        last_input = fixed_input
+
         print(f"Input: {input}")
-        print(f"Fixed input: {fixed_input}")
+        print(f"Fixed input: {last_input}")
         
-        data = json.loads(fixed_input)
+        data = json.loads(last_input)
         
         message = prepare_message(data)
 
