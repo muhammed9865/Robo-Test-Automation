@@ -74,7 +74,7 @@ jobs:
         id: apk-info
         uses: hkusu/apk-info-action@v1
         with:
-          apk_path: ${{ env.STAGING_APK_PATH }}
+          apk-path: ${{ env.STAGING_APK_PATH }}
 
       - name: Run Post Slack Message Script
         run: |
