@@ -23,7 +23,7 @@ jobs:
       - id: 'check_reviews'
         name: Check PR Reviews
         run: |
-          python script/check_review.py \
+          python script/check_reviews.py \
           ${{ secrets.GITHUB_TOKEN }} \
           ${{ github.repository_owner }} \
           ${{ github.event.pull_request.number }}
