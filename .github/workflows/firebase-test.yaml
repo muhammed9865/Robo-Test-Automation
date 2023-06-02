@@ -1,7 +1,9 @@
 name: Firebase Test Lab
 
 on:
-  pull_request:
+  pull_request_review:
+    types:
+      - submitted
     branches:
       - master
 
@@ -11,7 +13,24 @@ env:
   JAVA_VERSION: "17"
 
 jobs:
+  check-reviews:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - id: 'check_reviews'
+        name: Check PR Reviews
+        run: |
+          python script/check_pr_review.py \
+          ${{ secrets.GITHUB_TOKEN }} \
+          ${{ github.repository_owner }} \
+          ${{ github.event.pull_request.number }}
+
   setup-test:
+    needs: check-reviews
+    if: ${{ needs.check-reviews.outputs.review_approved == 'true' }}
     runs-on: ubuntu-latest
 
     steps:

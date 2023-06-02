@@ -1,7 +1,6 @@
 import requests
 import json
 import sys
-import os
 
 
 def fix_input_text(data: list) -> str:
