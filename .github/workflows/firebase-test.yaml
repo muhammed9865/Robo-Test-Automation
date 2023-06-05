@@ -3,7 +3,7 @@ name: Firebase Test Lab
 on:
   pull_request_review:
     types:
-      - submitted
+      - submitted # Trigger the workflow on pull request review submission events
     branches:
       - master
 
