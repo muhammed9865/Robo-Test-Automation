@@ -51,10 +51,10 @@ jobs:
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v1
 
-      - name: Authenticate Google Cloud
-        run: |
-          echo ${{ secrets.GCP_SA_KEY }} > ${{ runner.workspace }}/gcloud-service-key.json
-          gcloud auth activate-service-account --key-file=${{ runner.workspace }}/gcloud-service-key.json
+      - name: 'Authenticate to Google Cloud'
+        uses: `google-github-actions/auth@v0.4.0'
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
 
       - name: Set current project
