@@ -24,7 +24,7 @@ jobs:
         name: Check PR Reviews
         run: |
           python script/check_reviews.py \
-          ${{ secrets.GITHUB_TOKEN }} \
+          ${{ secrets.GH_TOKEN }} \
           ${{ github.repository_owner }} \
           ${{ github.event.pull_request.number }}
 
