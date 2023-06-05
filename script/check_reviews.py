@@ -22,6 +22,7 @@ def print_review_status(approved):
 
 def get_reviews():
     url = f"https://api.github.com/repos/{repo_owner}/{pr_repo}/pulls/{pr_number}/reviews"
+    print(url, end="\n")
     response = requests.get(url, headers=headers)
     if response.status_code != 200:
         print(f"Error getting reviews: {response.text}")
