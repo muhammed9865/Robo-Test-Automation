@@ -19,6 +19,7 @@ class MainActivity : ComponentActivity() {
             TestCI2Theme {
                 // A surface container using the 'background' color from the theme
                 Surface(
+                    // HI
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {

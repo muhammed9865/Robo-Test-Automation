@@ -20,7 +20,27 @@ android {
         }
     }
 
+    signingConfigs {
+        staging {
+            storeFile(file(STAGING_STORE_FILE))
+            storePassword STAGING_STORE_PASSWORD
+            keyAlias STAGING_KEY_ALIAS
+            keyPassword STAGING_KEY_PASSWORD
+
+        }
+    }
+
     buildTypes {
+        staging {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "app-staging.apk"
+                }
+            }
+            signingConfig signingConfigs.staging
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
