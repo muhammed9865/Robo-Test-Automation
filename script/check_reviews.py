@@ -13,6 +13,7 @@ headers = {
 }
 
 def print_review_status(approved):
+    print(f"Approval status: ${approved}")
     with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
         if approved:
             print("review_approved=true", file=fh)
