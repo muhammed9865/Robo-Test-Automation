@@ -67,6 +67,8 @@ def has_all_reviewers_approved(reviews) -> bool:
         if review["state"] == "APPROVED":
             approved_reviews += 1
     
+    print(f"Approved reviews: {approved_reviews}")
+    
     if approved_reviews == len(reviewers):
         approved = True
     else:
