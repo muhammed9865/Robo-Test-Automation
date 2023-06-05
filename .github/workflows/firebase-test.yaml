@@ -24,6 +24,11 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
       - id: 'check_reviews'
         name: Check PR Reviews
         run: |
@@ -52,8 +57,8 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
 
       - name: Authenticate Google Cloud
-        run: | 
-          echo ${{ secrets.GCP_SA_KEY }} > ${{ runner.workspace }}/gcloud-service-key.json
+        run: |
+          echo "${{ secrets.GCP_SA_KEY }}" > ${{ runner.workspace }}/gcloud-service-key.json
           gcloud auth activate-service-account --key-file=${{ runner.workspace }}/gcloud-service-key.json
 
 
