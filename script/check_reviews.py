@@ -33,9 +33,9 @@ def get_reviews():
     
 
 def get_reviewers(reviews):
-    reviewers = []
+    reviewers = set()
     for review in reviews:
-        reviewers.append(review["user"]["login"])
+        reviewers.add(review["user"]["login"])
     return reviewers
 
 
