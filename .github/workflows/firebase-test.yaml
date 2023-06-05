@@ -100,3 +100,4 @@ jobs:
           ${{ secrets.SLACK_WEBHOOK_URL }} \
           ${{ steps.apk-info.outputs.application-name }} \
           ${{ steps.apk-info.outputs.version-name }} \
+          
