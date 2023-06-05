@@ -15,6 +15,10 @@ env:
 jobs:
   check-reviews:
     runs-on: ubuntu-latest
+
+    outputs:
+      review_approved: ${{ steps.check_reviews.outputs.review_approved }}
+
     steps:
       - uses: actions/checkout@v2
         with:
