@@ -3,9 +3,9 @@ import sys
 import os
 
 github_token = sys.argv[1]
-pr_repo = sys.argv[2]
-pr_number = sys.argv[3]
-repo_owner = "muhammed9865"
+repo_owner = sys.argv[2]
+pr_repo = sys.argv[3]
+pr_number = sys.argv[4]
 
 headers = {
     "Authorization": f"Bearer {github_token}",

@@ -26,6 +26,7 @@ jobs:
           python script/check_reviews.py \
           ${{ secrets.GH_TOKEN }} \
           ${{ github.repository_owner }} \
+          ${{ github.event.repository.name }} \
           ${{ github.event.pull_request.number }}
 
   setup-test:
