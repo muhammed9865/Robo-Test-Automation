@@ -61,6 +61,7 @@ def has_all_reviewers_approved(reviews) -> bool:
         return False
     
     reviewers = get_reviewers(reviews)
+    print(f"Reviewers: {len(reviewers)}")
     approved_reviews = 0
     for review in reviews:
         if review["state"] == "APPROVED":
