@@ -53,6 +53,7 @@ def get_pending_reviews_count() -> int:
 def has_all_reviewers_approved(reviews) -> bool:
     approved = False
     pending_reviews = get_pending_reviews_count()
+    
     print(f"Pending reviews: {pending_reviews}")
     if pending_reviews > 0:
         return False
@@ -61,15 +62,15 @@ def has_all_reviewers_approved(reviews) -> bool:
         return False
     
     reviewers = get_reviewers(reviews)
-    print(f"Reviewers: {len(reviewers)}")
+
     approved_reviews = 0
     for review in reviews:
         if review["state"] == "APPROVED":
             approved_reviews += 1
     
-    print(f"Approved reviews: {approved_reviews}")
     
-    if approved_reviews == len(reviewers):
+    # Greater than or equal because a reviewer can be asked to review again after approving
+    if approved_reviews >= len(reviewers):
         approved = True
     else:
         approved = False
