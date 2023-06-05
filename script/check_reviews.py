@@ -30,6 +30,14 @@ def get_reviews():
         exit(1)
     else:
         return response.json()
+    
+
+def get_reviewers(reviews):
+    reviewers = []
+    for review in reviews:
+        reviewers.append(review["user"]["login"])
+    return reviewers
+
 
 def get_pending_reviews_count() -> int:
     url = f"https://api.github.com/repos/{repo_owner}/{pr_repo}/pulls/{pr_number}/requested_reviewers"
@@ -52,11 +60,16 @@ def has_all_reviewers_approved(reviews) -> bool:
     if len(reviews) == 0:
         return False
     
+    reviewers = get_reviewers(reviews)
+    approved_reviews = 0
     for review in reviews:
         if review["state"] == "APPROVED":
-            approved = True
-        else:
-            return False
+            approved_reviews += 1
+    
+    if approved_reviews == len(reviewers):
+        approved = True
+    else:
+        approved = False
     
 
     return approved
