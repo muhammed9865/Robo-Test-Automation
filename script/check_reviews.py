@@ -30,6 +30,14 @@ def get_reviews():
         exit(1)
     else:
         return response.json()
+    
+
+def get_reviewers(reviews):
+    reviewers = set()
+    for review in reviews:
+        reviewers.add(review["user"]["login"])
+    return reviewers
+
 
 def get_pending_reviews_count() -> int:
     url = f"https://api.github.com/repos/{repo_owner}/{pr_repo}/pulls/{pr_number}/requested_reviewers"
@@ -45,6 +53,7 @@ def get_pending_reviews_count() -> int:
 def has_all_reviewers_approved(reviews) -> bool:
     approved = False
     pending_reviews = get_pending_reviews_count()
+
     print(f"Pending reviews: {pending_reviews}")
     if pending_reviews > 0:
         return False
@@ -52,11 +61,33 @@ def has_all_reviewers_approved(reviews) -> bool:
     if len(reviews) == 0:
         return False
     
+    reviewers = get_reviewers(reviews)
+
+    # get unique latest reviews by reviewers
+    unique_reviews = {}
     for review in reviews:
-        if review["state"] == "APPROVED":
-            approved = True
+        reviewer = review["user"]["login"]
+        if reviewer not in unique_reviews:
+            unique_reviews[reviewer] = review
         else:
-            return False
+            if review["submitted_at"] > unique_reviews[reviewer]["submitted_at"]:
+                unique_reviews[reviewer] = review
+    
+    print(f"Unique reviews: {len(unique_reviews)}")
+    
+    approved_reviews = 0
+    for reviewer in unique_reviews:
+        if unique_reviews[reviewer]["state"] == "APPROVED":
+            approved_reviews += 1
+    
+    print(f"Approved reviews: {approved_reviews}")
+    
+    
+    # Greater than or equal because a reviewer can be asked to review again after approving
+    if approved_reviews >= len(reviewers):
+        approved = True
+    else:
+        approved = False
     
 
     return approved
