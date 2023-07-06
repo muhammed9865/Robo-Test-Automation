@@ -23,5 +23,6 @@
       ],
       "groupName": "kotlin"
     }
-  ]
+  ],
+  "labels": ["renovate-bot"]
 }
