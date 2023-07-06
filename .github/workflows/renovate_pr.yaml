@@ -7,7 +7,7 @@ env:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'renovate_docker')
+    if: contains(github.event.pull_request.labels.*.name, 'renovate-bot')
     steps:
       - uses: actions/checkout@v2
         with:
@@ -27,7 +27,7 @@ jobs:
 
   build-project:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'renovate_docker')
+    if: contains(github.event.pull_request.labels.*.name, 'renovate-bot')
 
     steps:
       - uses: actions/checkout@v2
@@ -48,7 +48,7 @@ jobs:
 
   run-unit-tests:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'renovate_docker')
+    if: contains(github.event.pull_request.labels.*.name, 'renovate-bot')
 
     steps:
       - uses: actions/checkout@v2
