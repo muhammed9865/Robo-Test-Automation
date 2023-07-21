@@ -22,6 +22,12 @@
         "com.google.devtools.ksp"
       ],
       "groupName": "kotlin"
+    },
+    {
+      "fileMatch": [
+        "(^|/)gradle/wrapper/gradle-wrapper\\.properties$"
+      ],
+      "groupName": "kotlin"
     }
   ],
   "labels": ["renovate-bot"]
